@@ -1,8 +1,8 @@
 library(dplyr)
 library(ggplot2)
 library(stringr)
-source("~/R/weatheR/01_get_the_data.R")
-source("~/R/weatheR/02_parse_the_data.R")
+source("01_get_the_data.R")
+source("02_parse_the_data.R")
 
 df <- df %>% 
   filter(year > 1899) %>% 
@@ -19,17 +19,17 @@ ggplot(df)+
   #geom_point(aes(year, temperature, color = temperature), alpha = 0.7)+
   geom_smooth(aes(year, temperature), se = F, method = "lm", color = "#3A3F4A", size = 0.7)+
   scale_y_continuous(name = NULL, breaks = seq(-25, 25, 5))+
-  scale_x_continuous(name = NULL, breaks = c(1900, 2014))+
+  scale_x_continuous(name = NULL, breaks = c(1900, 2016))+
   guides(color = guide_colorbar(title = "Середньомісячна температура в Києві, C", 
                                 title.position = "top"))+
-  labs(title = "Температура в Києві, 1900-2014 рік",
-       subtitle = str_wrap("Горизонтальні лінії на графіку позначають середню температуру для кожного місяця за період спостережень з 1900 до 2014 року включно. Довжина вертикальних ліній позначає різницю між середньомісячною температурою в конкретному році та середньою температурою для цього місяця у 1900-2014 роках. Лінія тренду покликана показати зв’язок між змінними «рік» та «температура»", 160),
-       caption = "\nДані: Центральна геофізична обсерваторія Візуалізація: textura.in.ua")+
+  labs(title = "Температура в Києві, 1900-2016 рік",
+       subtitle = str_wrap("Горизонтальні лінії на графіку позначають середню температуру для кожного місяця за період спостережень з 1900 до 2016 року включно. Довжина вертикальних ліній позначає різницю між середньомісячною температурою в конкретному році та середньою температурою для цього місяця у 1900-2016 роках. Лінія тренду покликана показати зв’язок між змінними «рік» та «температура»", 160),
+       caption = "\nДані: Центральна геофізична обсерваторія | Візуалізація: Textura.in.ua")+
   viridis::scale_color_viridis(end = 0.9)+
   facet_wrap(~month, ncol = 12)+
   theme_minimal(base_family = "Ubuntu Condensed")+
   theme(panel.grid.minor = element_blank(),
-        panel.grid.major = element_line(linetype = "dotted", size = 0.6),
+        panel.grid.major = element_line(size = 0.35, linetype = 'dotted', color = '#5D646F'),
         panel.margin.x = unit(3, "lines"),
         text = element_text(family = "Ubuntu Condensed", color = "#3A3F4A"),
         axis.text.y = element_text(size = 18),
