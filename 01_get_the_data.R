@@ -2,7 +2,7 @@ library(rvest)
 
 get_data <- function() {
   
-  page <- html_session("http://cgo.kiev.ua/index.php?fn=k_klimat&f=kyiv&p=1")
+  page <- html_session('http://cgo-sreznevskyi.kyiv.ua/index.php?fn=k_klimat&f=kyiv')
   
   table <- page %>% 
     html_nodes('h4+ .tablemain') %>% 
@@ -14,3 +14,5 @@ get_data <- function() {
 }
 
 df <- get_data()
+
+write.csv(x = df, file = 'data/raw.csv', row.names = FALSE, fileEncoding = 'UTF-8')
